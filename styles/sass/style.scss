@@ -113,6 +113,11 @@ ul {
 //     grid-column-end: 5;
 // }
 
+.gallery li {
+    border-radius: 15%;
+    overflow: hidden;
+}
+
 .hidden {
 
     position: relative;

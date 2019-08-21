@@ -28,6 +28,11 @@ ul {
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
+.gallery li {
+  border-radius: 15%;
+  overflow: hidden;
+}
+
 .hidden {
   position: relative;
 }
