@@ -1,0 +1,129 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    max-width: 1280px;
+
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.wrapper {
+    max-width: 1280px;
+    margin: 20px;
+   
+}
+
+li {
+    // height:5vh;
+    // overflow: hidden;
+    // min-width: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    // max-height: 30vh;
+    // min-height: 300px;
+
+}
+
+.gallery ul {
+    display: grid;
+    // grid-template-columns: repeat(4, minmax(0,25vw));
+    // grid-template-rows: repeat(3, minmax(0,22.5vw));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    // min-height: 0;
+    // min-width: 0;
+    }
+
+// .galleryItem1 {
+//     grid-row-start: 1;
+//     grid-column-start: 1;
+//     grid-column-end: 2;
+// }
+
+// .galleryItem2 {
+//     grid-row-start: 1;
+//     grid-column-start: 2;
+//     grid-column-end: 3;
+// }
+
+// .galleryItem3 {
+//     grid-row-start: 1;
+//     grid-column-start: 3;
+//     grid-column-end: 4;
+// }
+
+// .galleryItem4 {
+//     grid-row-start: 1;
+//     grid-column-start: 4;
+//     grid-column-end: 5;
+// }
+
+// .galleryItem5 {
+//     grid-row-start: 2;
+//     grid-column-start: 1;
+//     grid-column-end: 2;
+// }
+
+// .galleryItem6 {
+//     grid-row-start: 2;
+//     grid-column-start: 2;
+//     grid-column-end: 3;
+// }
+
+// .galleryItem7 {
+//     grid-row-start: 2;
+//     grid-column-start: 3;
+//     grid-column-end: 4;
+// }
+
+// .galleryItem8 {
+//     grid-row-start: 2;
+//     grid-column-start: 4;
+//     grid-column-end: 5;
+// }
+
+// .galleryItem9 {
+//     grid-row-start: 3;
+//     grid-column-start: 1;
+//     grid-column-end: 2;
+// }
+
+// .galleryItem10 {
+//     grid-row-start: 3;
+//     grid-column-start: 2;
+//     grid-column-end: 3;
+// }
+
+// .galleryItem11 {
+//     grid-row-start: 3;
+//     grid-column-start: 3;
+//     grid-column-end: 4;
+// }
+
+// .galleryItem12 {
+//     grid-row-start: 3;
+//     grid-column-start: 4;
+//     grid-column-end: 5;
+// }
+
+.hidden {
+
+    position: relative;
+
+    &::before {
+        content: '';
+        background-color: blue;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; 
+    }
+}
