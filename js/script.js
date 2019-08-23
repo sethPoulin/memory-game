@@ -92,6 +92,7 @@ const startPicking = () => {
         if(clickedCards.length === 2){
             console.log('condition is met, going to run checkMatch');
             checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
+            $('.gallery li').removeClass('notClickable');
             // $('ul').off('click','li');
         } else {
             console.log('condition is not met.')
