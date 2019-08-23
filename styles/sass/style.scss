@@ -8,6 +8,7 @@ html {
 body {
     max-width: 1280px;
     background: grey;
+    margin: 0 auto;
 
 }
 
@@ -16,9 +17,27 @@ img {
     display: block;
 }
 
-.gallery {
+main {
     background-image: url(../assets/woodenTable.jpg);
     background-size: cover;
+}
+
+h1 {
+    color:#e8e7e7;
+    font-size: 6rem;
+    text-align: center;
+    width: 400px;
+}
+
+p {
+    color:#e8e7e7;
+    font-size: 3rem;
+    text-shadow: 1px 0 0 #b80c09;
+    text-align: center; 
+}
+
+.gallery {
+    
     /* background: grey; */
     padding-top: 50px;
     padding-bottom: 50px;

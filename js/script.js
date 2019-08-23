@@ -4,18 +4,19 @@ const images = [
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
     '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
-    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
-    '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
-    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
-    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
+    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    // '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
+    // '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
+    // '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
+    // '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
 ];
 
 
 const imageOrder = [];
+let cardsInPlay = 0;
 
 
 $('.start').on('click',function(){
@@ -23,7 +24,9 @@ $('.start').on('click',function(){
     randomizeImages();
     imageOrder.forEach(function(item){
         $('.gallery ul').append(`<li class="hidden">${item}</li>`);
+        cardsInPlay +=1;
     }); 
+    console.log('cards in play:',cardsInPlay);
     startPicking();   
 });
 
@@ -41,6 +44,15 @@ const clearArray = (array) => {
     array.length = 0;
 }
 
+const playAgain = () => {
+    setTimeout(()=> {$('.gallery li').addClass('hide')},
+    600);
+
+    //display a message in the console saying you won.
+    //display a button to play again.
+    //if button is clicked, randomizeImages()
+}
+
 const checkMatch = (image1, image2) => {
 
     console.log('checkMatch is running');
@@ -49,6 +61,11 @@ const checkMatch = (image1, image2) => {
         console.log("it's a match")
         $(image1).parent().addClass('offGrid');
         $(image2).parent().addClass('offGrid');
+        cardsInPlay -= 2;
+        if(cardsInPlay === 0) {
+            playAgain();
+        }
+        console.log('cards in play:',cardsInPlay);
         
     } 
     else {
@@ -58,7 +75,6 @@ const checkMatch = (image1, image2) => {
         $(image2).parent().addClass('hidden');
         },400);
     };
-
     clearArray(clickedCards);
     startPicking();
 }
