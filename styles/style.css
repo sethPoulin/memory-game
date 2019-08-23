@@ -236,16 +236,37 @@ img {
   display: block;
 }
 
-main {
+.mainWrapper {
+  height: 100vh;
   background-image: url(../assets/woodenTable.jpg);
   background-size: cover;
+  padding-top: 100px;
+}
+
+.headerPlate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  background-color: rgba(218, 214, 214, 0.4);
 }
 
 h1 {
   color: #e8e7e7;
-  font-size: 6rem;
+  font-size: 7rem;
   text-align: center;
-  width: 400px;
+  width: 600px;
+  font-family: 'Sail', cursive;
+  padding: 40px;
 }
 
 p {

@@ -1,3 +1,33 @@
+// font-family: 'Great Vibes', cursive;
+// font-family: 'Shrikhand', cursive;
+// font-family: 'Yeseva One', cursive;
+// font-family: 'Oleo Script Swash Caps', cursive;
+// font-family: 'Sail', cursive;
+
+// header {
+//     h1 {
+//         // background-color: red;
+//         &:first-of-type {
+//             font-family: 'Great Vibes', cursive;
+//             // background-color: green;
+//         }
+//         &:nth-of-type(2){
+//             font-family: 'Shrikhand', cursive;
+//         }
+//         &:nth-of-type(3){
+//             font-family: 'Yeseva One', cursive;
+//         }
+//         &:nth-of-type(4){
+//             font-family: 'Oleo Script Swash Caps', cursive;
+//         }
+//         &:last-of-type{
+//             font-family: 'Sail', cursive;
+//         }
+//     }
+// }
+
+
+
 @import "partials/setup.scss";
 
 
@@ -17,16 +47,38 @@ img {
     display: block;
 }
 
-main {
+.mainWrapper {
+    height: 100vh;
     background-image: url(../assets/woodenTable.jpg);
     background-size: cover;
+    padding-top: 100px;
+
+}
+
+// main {
+    
+// }
+
+.headerPlate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: rgba(218,214,214,0.4);
+    
+    // background-color: red;
+    // position: relative;
+    // z-index: 10;
 }
 
 h1 {
     color:#e8e7e7;
-    font-size: 6rem;
+    font-size: 7rem;
     text-align: center;
-    width: 400px;
+    width: 600px;
+    font-family: 'Sail', cursive;
+    padding: 40px;
 }
 
 p {
