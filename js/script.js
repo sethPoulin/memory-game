@@ -4,31 +4,38 @@ const images = [
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
     '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
-    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    // '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
-    // '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
-    // '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
-    // '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
+    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
+    '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
+    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
+    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
 ];
 
 
 const imageOrder = [];
 let cardsInPlay = 0;
 
-
-$('.start').on('click',function(){
-    $('.start').addClass('hide');
-    randomizeImages();
-    imageOrder.forEach(function(item){
-        $('.gallery ul').append(`<li class="hidden">${item}</li>`);
-        cardsInPlay +=1;
-    }); 
-    console.log('cards in play:',cardsInPlay);
-    startPicking();   
-});
+let gameStart = function(){
+    $('.start').off('click');
+    $('.start').on('click',function(){
+        console.log('start was clicked');
+        $(this).addClass('hide');
+        $('.instructions').addClass('hide');
+        $('h1').addClass('hide');
+        // $('.mainWrapper').css('padding-top','0');
+        
+        randomizeImages();
+        imageOrder.forEach(function(item){
+            $('.gallery ul').append(`<li class="hidden">${item}</li>`);
+            cardsInPlay +=1;
+        }); 
+        console.log('cards in play:',cardsInPlay);
+        startPicking();   
+    });
+};
 
 //function to randomly copy an item from the images array, place it in a new array called imageOrder, and then pop the selected item off of the images array.  This continues until there are no more items left in the images array. 
 const randomizeImages = () => {
@@ -45,12 +52,40 @@ const clearArray = (array) => {
 }
 
 const playAgain = () => {
-    setTimeout(()=> {$('.gallery li').addClass('hide')},
-    600);
-
+    setTimeout(()=> {
+        $('.gallery li').addClass('hide');
+        $('.mainWrapper').css('padding-top','');
+        $('header .wrapper').append(`
+        <h1 class="congratulations">You won!</h1>
+        <div class="instructions congratulations">
+            <p>Congratulations, you have a great memory.</p>
+            <p>Click the button below to play again.</p>
+        </div>
+        <button class="playAgain congratulations">Play again</button>
+        `);
+        }
+        ,600);
+        $('header .wrapper').on('click', '.playAgain', function(){
+            resetStartPage();
+            console.log('resetStartPage is fired');
+            // $('li').remove();
+            gameStart(); 
+        });
+        
     //display a message in the console saying you won.
     //display a button to play again.
     //if button is clicked, randomizeImages()
+}
+
+const resetStartPage = () => {
+    console.log('game has restarted.');
+    $('h1.congratulations').remove();
+    $('div.congratulations').remove();
+    $('button.congratulations').remove();
+    $('.start').removeClass('hide');
+    $('.instructions').removeClass('hide');
+    $('h1').removeClass('hide');
+    console.log('gameStart was run');
 }
 
 const checkMatch = (image1, image2) => {
@@ -116,6 +151,8 @@ const startPicking = () => {
         
     });
 }
+
+gameStart();
 
 // startPicking();
     // Display rules/instructions on the page. 

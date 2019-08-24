@@ -1,8 +1,10 @@
-// font-family: 'Great Vibes', cursive;
-// font-family: 'Shrikhand', cursive;
-// font-family: 'Yeseva One', cursive;
-// font-family: 'Oleo Script Swash Caps', cursive;
 // font-family: 'Sail', cursive;
+// font-family: 'Merriweather', serif;
+
+
+$white: rgb(218,214,214);
+$red: rgb(150, 10, 8);
+$brown: rgb(67, 37, 19);
 
 // header {
 //     h1 {
@@ -37,8 +39,10 @@ html {
 
 body {
     max-width: 1280px;
+    width: 100%;
     background: grey;
     margin: 0 auto;
+    background: linear-gradient(to right, #005aa7, #9fb5bb 90%);
 
 }
 
@@ -47,52 +51,82 @@ img {
     display: block;
 }
 
-.mainWrapper {
-    height: 100vh;
-    background-image: url(../assets/woodenTable.jpg);
-    background-size: cover;
-    padding-top: 100px;
+// .mainWrapper { 
+//     padding-top: 100px;
+//     width: 80%;
+// }
 
+header {
+    // min-height: 100vh;
+    // background-image: url(../assets/woodenTable.jpg);
+    // background: linear-gradient(to right, #1f4037, #99f2c8);
+    
+    // background-size: cover;
 }
 
 // main {
     
 // }
 
-.headerPlate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    margin: 0 auto;
-    background-color: rgba(218,214,214,0.4);
+// .headerPlate {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: fit-content;
+//     margin: 0 auto;
+//     background-color: rgba(218,214,214,0.25);
     
     // background-color: red;
     // position: relative;
     // z-index: 10;
-}
+// }
+
+// .instructions {
+    // background-color: rgba(218,214,214,0.25);
+    // background-color: rgba(67, 37, 19, 0.6);
+
+    // margin-top: 50px;
+    // padding: 20px;
+// }
 
 h1 {
-    color:#e8e7e7;
+    // color:#e8e7e7;
+    // color: $red;
+    color: $white;
+    // text-shadow: 1px 1px rgba(218,214,214,0.5);
+    text-shadow: -1px 3px rgba(150, 10, 8,.5), -1px 2px rgba(150, 10, 8,.5);
     font-size: 7rem;
     text-align: center;
     width: 600px;
     font-family: 'Sail', cursive;
     padding: 40px;
+    padding-top: 100px;
+    // background-color: rgba(218,214,214,.2);
+    // background-color: rgba(67, 37, 19, 0.6);
+    // margin: 0 auto;
 }
 
 p {
     color:#e8e7e7;
-    font-size: 3rem;
+    font-size: 2.4rem;
     text-shadow: 1px 0 0 #b80c09;
     text-align: center; 
+    font-family: 'merriweather',serif;
+    letter-spacing: 0.1rem;
+    line-height: 4rem;
+    // margin-top: 20px;
+    // margin-bottom: 20px;
+    // background-color: rgba(218,214,214,.2);
+    // padding: 5px;
+    max-width: 600px;
+    // margin: 0 auto;
 }
 
 .gallery {
     
     /* background: grey; */
-    padding-top: 50px;
-    padding-bottom: 50px;
+    // padding-top: 50px;
+    // padding-bottom: 50px;
   }
 
 .wrapper {
@@ -101,6 +135,9 @@ p {
 
     // background: grey;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
    
 }
 
@@ -109,6 +146,7 @@ p {
 ul {
     list-style-type: none;
     padding: 0;
+    padding-top: 80px;
     // max-height: 30vh;
     // min-height: 300px;
 
@@ -122,6 +160,23 @@ ul {
     // min-height: 0;
     // min-width: 0;
     }
+
+button {
+    // margin: 0 auto;
+    text-align: center;
+    margin-top: 40px;
+    width: 100%;
+    // height: 40px;
+    border: none;
+    background-color: rgba(150, 10, 8,1);
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    color: $white;
+    font-family: 'merriweather',serif;
+    font-size: 2.4rem;
+    display: inline-block;
+    padding: 15px 0;
+
+}
 
 // .galleryItem1 {
 //     grid-row-start: 1;
@@ -202,8 +257,9 @@ ul {
     transition-delay: .3s;
     position: relative;
     bottom: 0;
-    margin: 2px;
+    margin: 4px;
     border: 2px solid white;
+    box-shadow: 2px 2px 1px rgba(0,0,0,.35);
 }
 
 .hidden {
@@ -213,8 +269,8 @@ ul {
     &::before {
         content: '';
         background-color:white;
-        background-image: linear-gradient(45deg, rgba(200,0,0,.3) 50%, transparent 50%),
-        linear-gradient(90deg,rgba(200,0,0,.3) 50%, transparent 50%);
+        background-image: linear-gradient(90deg, rgba(200,0,0,.5), 50%, transparent 50%),
+        linear-gradient(0deg,rgba(200,0,0,.5) 50%, transparent 50%);
         background-size:25px 25px;
         border: 1px solid white;
         position: absolute;

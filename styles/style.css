@@ -227,8 +227,11 @@ html {
 
 body {
   max-width: 1280px;
+  width: 100%;
   background: grey;
   margin: 0 auto;
+  background: -webkit-gradient(linear, left top, right top, from(#005aa7), color-stop(90%, #9fb5bb));
+  background: linear-gradient(to right, #005aa7, #9fb5bb 90%);
 }
 
 img {
@@ -236,61 +239,52 @@ img {
   display: block;
 }
 
-.mainWrapper {
-  height: 100vh;
-  background-image: url(../assets/woodenTable.jpg);
-  background-size: cover;
-  padding-top: 100px;
-}
-
-.headerPlate {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 0 auto;
-  background-color: rgba(218, 214, 214, 0.4);
-}
-
 h1 {
-  color: #e8e7e7;
+  color: #dad6d6;
+  text-shadow: -1px 3px rgba(150, 10, 8, 0.5), -1px 2px rgba(150, 10, 8, 0.5);
   font-size: 7rem;
   text-align: center;
   width: 600px;
   font-family: 'Sail', cursive;
   padding: 40px;
+  padding-top: 100px;
 }
 
 p {
   color: #e8e7e7;
-  font-size: 3rem;
+  font-size: 2.4rem;
   text-shadow: 1px 0 0 #b80c09;
   text-align: center;
+  font-family: 'merriweather',serif;
+  letter-spacing: 0.1rem;
+  line-height: 4rem;
+  max-width: 600px;
 }
 
 .gallery {
   /* background: grey; */
-  padding-top: 50px;
-  padding-bottom: 50px;
 }
 
 .wrapper {
   max-width: 700px;
   margin: 20px;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
+  padding-top: 80px;
 }
 
 .gallery ul {
@@ -298,6 +292,21 @@ ul {
   display: grid;
   -ms-grid-columns: (minmax(150px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+button {
+  text-align: center;
+  margin-top: 40px;
+  width: 100%;
+  border: none;
+  background-color: #960a08;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  color: #dad6d6;
+  font-family: 'merriweather',serif;
+  font-size: 2.4rem;
+  display: inline-block;
+  padding: 15px 0;
 }
 
 .gallery li {
@@ -309,8 +318,10 @@ ul {
           transition-delay: .3s;
   position: relative;
   bottom: 0;
-  margin: 2px;
+  margin: 4px;
   border: 2px solid white;
+  -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
+          box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
 }
 
 .hidden {
@@ -320,7 +331,8 @@ ul {
 .hidden::before {
   content: '';
   background-color: white;
-  background-image: linear-gradient(45deg, rgba(200, 0, 0, 0.3) 50%, transparent 50%), linear-gradient(90deg, rgba(200, 0, 0, 0.3) 50%, transparent 50%);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(200, 0, 0, 0.5)), color-stop(50%), color-stop(50%, transparent)), -webkit-gradient(linear, left bottom, left top, color-stop(50%, rgba(200, 0, 0, 0.5)), color-stop(50%, transparent));
+  background-image: linear-gradient(90deg, rgba(200, 0, 0, 0.5), 50%, transparent 50%), linear-gradient(0deg, rgba(200, 0, 0, 0.5) 50%, transparent 50%);
   background-size: 25px 25px;
   border: 1px solid white;
   position: absolute;
