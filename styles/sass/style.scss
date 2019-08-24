@@ -56,13 +56,13 @@ img {
 //     width: 80%;
 // }
 
-header {
-    // min-height: 100vh;
-    // background-image: url(../assets/woodenTable.jpg);
-    // background: linear-gradient(to right, #1f4037, #99f2c8);
+// header {
+//     // min-height: 100vh;
+//     // background-image: url(../assets/woodenTable.jpg);
+//     // background: linear-gradient(to right, #1f4037, #99f2c8);
     
-    // background-size: cover;
-}
+//     // background-size: cover;
+// }
 
 // main {
     
@@ -122,14 +122,9 @@ p {
     // margin: 0 auto;
 }
 
-.gallery {
-    
-    /* background: grey; */
-    // padding-top: 50px;
-    // padding-bottom: 50px;
-  }
 
-.wrapper {
+
+header .wrapper {
     max-width: 700px;
     margin: 20px;
 
@@ -141,24 +136,52 @@ p {
    
 }
 
+// .gallery * {
+//     border: 1px solid tomato;
+// }
 
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    padding-top: 80px;
-    // max-height: 30vh;
-    // min-height: 300px;
-
+.gallery .wrapper {
+    // max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    // max-height: 100vh;
+    // min-height: 100vh;
+    // height: 100vh;
+    width: 90%;
+    margin: 0 auto;
 }
+
+.gallery .wrapper.fullHeight {
+    max-height: 100vh;
+    min-height: 100vh;
+    // height: 100vh;
+}
+
 
 .gallery ul {
     display: grid;
     // grid-template-columns: repeat(4, minmax(0,25vw));
     // grid-template-rows: repeat(3, minmax(0,22.5vw));
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     // min-height: 0;
     // min-width: 0;
+    list-style-type: none;
+    padding: 0;
+
+        @media(max-width: 774px) {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+
+        @media(max-width: 420px) {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+
+        @media(max-width: 353px) {
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        }
+    
     }
 
 button {
@@ -253,7 +276,7 @@ button {
 .gallery li {
     border-radius: 15%;
     overflow: hidden;
-    transition: .7s ease-out;
+    transition: bottom .7s ease-out;
     transition-delay: .3s;
     position: relative;
     bottom: 0;

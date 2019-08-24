@@ -25,7 +25,8 @@ let gameStart = function(){
         $(this).addClass('hide');
         $('.instructions').addClass('hide');
         $('h1').addClass('hide');
-        // $('.mainWrapper').css('padding-top','0');
+        $('.gallery .wrapper').addClass('fullHeight');
+        
         
         randomizeImages();
         imageOrder.forEach(function(item){
