@@ -413,7 +413,7 @@ header .wrapper {
 button {
   text-align: center;
   margin-top: 40px;
-  width: 100%;
+  width: 80%;
   border: none;
   background-color: #960a08;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
@@ -428,12 +428,6 @@ button {
 @media (max-width: 667px) {
   button {
     font-size: 2rem;
-  }
-}
-
-@media (max-width: 487px) {
-  button {
-    width: 80%;
   }
 }
 

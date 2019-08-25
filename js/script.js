@@ -1,13 +1,13 @@
 
 const images = [
-    // '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
-    // '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
-    // '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
-    // '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
-    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
+    '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
+    '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
+    '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
+    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
@@ -30,7 +30,7 @@ let gameStart = function(){
         
         randomizeImages();
         imageOrder.forEach(function(item){
-            $('.gallery ul').append(`<li class="hidden">${item}</li>`);
+            $('.gallery ul').append(`<li class="hidden" tabindex="0">${item}</li>`);
             cardsInPlay +=1;
         }); 
         console.log('cards in play:',cardsInPlay);
@@ -62,17 +62,23 @@ const playAgain = () => {
             <p>Congratulations, you have a great memory.</p>
             <p>Click the button below to play again.</p>
         </div>
-        <button class="playAgain congratulations">Play again</button>
+        <button class="playAgain congratulations" tabindex="0">Play again</button>
         `);
-        $('.gallery .wrapper').removeClass('fullHeight');
+        $('.gallery .wrapper').removeClass('fullHeight'); 
         }
         ,600);
         $('header .wrapper').on('click', '.playAgain', function(){
             resetStartPage();
             console.log('resetStartPage is fired');
             // $('li').remove();
-            gameStart(); 
+            gameStart();
         });
+        // $('header .wrapper').on('keydown', '.playAgain', function(e){
+        //     if(e.which == 13) {
+        //         resetStartPage();
+        //         gameStart();
+        //     }
+        // })
         
     //display a message in the console saying you won.
     //display a button to play again.
@@ -123,34 +129,46 @@ const checkMatch = (image1, image2) => {
 
 const clickedCards = [];
 
+const checkNumberOfPicks = function(card) {
+    $(card).removeClass('hidden');
+    $(card).addClass('notClickable');
+    $(card).removeAttr('tabindex');
+    
+    clickedCards.push(card);
+        console.log('clicked cards array:', clickedCards);
+    // } else if(clickedCards.length === 1){
+        // $(this).removeClass('hidden');
+        // clickedCards.push(this);
+        // console.log('clicked cards array:', clickedCards);      
+
+    if(clickedCards.length === 2){
+        console.log('condition is met, going to run checkMatch');
+        checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
+        $('.gallery li').removeClass('notClickable');
+        $('.gallery li').removeAttr('tabindex');
+        $('.gallery li').attr('tabindex','0');
+        // $('ul').off('click','li');
+    } else {
+        console.log('condition is not met.')
+    }; 
+}
+
 const startPicking = () => {
     $('ul').off('click');
+    $('ul').off('keydown');
     console.log('startPicking has started');
     // clearArray(clickedCards);
     console.log('length of clicked cards array',clickedCards.length);
-    $('ul').on('click', 'li',function(){
-        console.log('click');
-        // console.log('length of array before clicking',clickedCards.length); 
-        // if(clickedCards.length === 0){
-        $(this).removeClass('hidden');
-        $(this).addClass('notClickable');
-        
-        clickedCards.push(this);
-            // console.log('clicked cards array:', clickedCards);
-        // } else if(clickedCards.length === 1){
-            // $(this).removeClass('hidden');
-            // clickedCards.push(this);
-            // console.log('clicked cards array:', clickedCards);      
-    
-        if(clickedCards.length === 2){
-            console.log('condition is met, going to run checkMatch');
-            checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
-            $('.gallery li').removeClass('notClickable');
-            // $('ul').off('click','li');
-        } else {
-            console.log('condition is not met.')
-        }; 
-        
+    $('ul').on('keydown', 'li',function(e){
+        if(e.which == 13){
+            console.log('click');
+            checkNumberOfPicks(this);
+            // console.log('length of array before clicking',clickedCards.length); 
+            // if(clickedCards.length === 0){   
+        }   
+    });
+    $('ul').on('click', 'li', function(){
+        checkNumberOfPicks(this);
     });
 }
 

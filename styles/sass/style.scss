@@ -248,7 +248,7 @@ button {
     // margin: 0 auto;
     text-align: center;
     margin-top: 40px;
-    width: 100%;
+    width: 80%;
     // height: 40px;
     border: none;
     background-color: rgba(150, 10, 8,1);
@@ -263,12 +263,22 @@ button {
         font-size: 2rem;
     }
 
-    @media(max-width: 487px) {
-        width: 80%;
-    }
+    // @media(max-width: 487px) {
+    //     width: 80%;
+    // }
 
 }
 
+// button.card {
+//     // margin: 0 auto;
+//     // text-align: center;
+//     // margin-top: 40px;
+//     // width: 80%;
+//     // height: 40px;
+//     border: none;
+//     width: 100%;
+
+// }
 // .galleryItem1 {
 //     grid-row-start: 1;
 //     grid-column-start: 1;
