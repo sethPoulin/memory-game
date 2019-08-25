@@ -1,13 +1,13 @@
 
 const images = [
-    '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
-    '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
-    '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
-    '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
-    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
-    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
-    '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    // '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
+    // '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
+    // '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
+    // '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
+    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    // '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
+    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
+    // '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
@@ -64,6 +64,7 @@ const playAgain = () => {
         </div>
         <button class="playAgain congratulations">Play again</button>
         `);
+        $('.gallery .wrapper').removeClass('fullHeight');
         }
         ,600);
         $('header .wrapper').on('click', '.playAgain', function(){

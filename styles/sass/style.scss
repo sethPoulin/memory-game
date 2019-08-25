@@ -42,7 +42,7 @@ body {
     width: 100%;
     background: grey;
     margin: 0 auto;
-    background: linear-gradient(to right, #005aa7, #9fb5bb 90%);
+    background: linear-gradient(to right, #005aa7, #9fb5bb);
 
 }
 
@@ -97,35 +97,91 @@ h1 {
     text-shadow: -1px 3px rgba(150, 10, 8,.5), -1px 2px rgba(150, 10, 8,.5);
     font-size: 7rem;
     text-align: center;
-    width: 600px;
+    max-width: 600px;
     font-family: 'Sail', cursive;
     padding: 40px;
     padding-top: 100px;
     // background-color: rgba(218,214,214,.2);
     // background-color: rgba(67, 37, 19, 0.6);
     // margin: 0 auto;
+
+    @media(max-width:570px) {
+        padding-top: 80px;
+        font-size: 6rem;
+    }
+
+    @media(max-width:487px) {
+        font-size: 5rem;
+        padding-top: 50px;
+    }
+
+    @media(max-width:414px) {
+        padding: 0;
+        padding-bottom: 40px;
+        padding-top: 70px;
+    }
+
+    @media(max-width:366px) {
+        font-size: 4.5rem;
+    }
+
+    @media(max-width:338px) {
+        font-size: 4.4rem;
+        padding-bottom: 30px;
+    }
+
+    @media(max-width:320px) {
+        padding-top: 40px;
+    }
 }
+
+h1.congratulations {
+    padding-top: 200px;
+
+    @media(max-width:500px) {
+        padding-top: 150px;
+    }
+
+}
+
 
 p {
     color:#e8e7e7;
     font-size: 2.4rem;
     text-shadow: 1px 0 0 #b80c09;
     text-align: center; 
-    font-family: 'merriweather',serif;
+    font-family: 'Roboto', sans-serif;
     letter-spacing: 0.1rem;
     line-height: 4rem;
     // margin-top: 20px;
     // margin-bottom: 20px;
     // background-color: rgba(218,214,214,.2);
     // padding: 5px;
-    max-width: 600px;
+    max-width: 700px;
+    width: 100%;
     // margin: 0 auto;
+
+    @media(max-width: 667px) {
+        max-width: 470px;
+        font-size: 2rem;
+        margin: 0 auto;
+    }
+
+    @media(max-width: 570px) {
+        max-width: 300px;
+    }
+
+    @media(max-width: 366px) {
+        width: 80%;
+        font-size: 1.8rem;
+    }
 }
 
 
 
 header .wrapper {
     max-width: 700px;
+    width: 80%;
     margin: 20px;
 
     // background: grey;
@@ -133,6 +189,10 @@ header .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media(max-width: 487px){
+        width: 90%;
+    }
    
 }
 
@@ -194,10 +254,18 @@ button {
     background-color: rgba(150, 10, 8,1);
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     color: $white;
-    font-family: 'merriweather',serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 2.4rem;
     display: inline-block;
     padding: 15px 0;
+
+    @media(max-width: 667px) {
+        font-size: 2rem;
+    }
+
+    @media(max-width: 487px) {
+        width: 80%;
+    }
 
 }
 
