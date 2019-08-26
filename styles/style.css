@@ -291,6 +291,10 @@ h1 {
   }
 }
 
+.hide {
+  display: none;
+}
+
 h1.congratulations {
   padding-top: 200px;
 }
@@ -331,6 +335,27 @@ p {
   p {
     width: 80%;
     font-size: 1.8rem;
+  }
+}
+
+button {
+  text-align: center;
+  margin-top: 40px;
+  width: 80%;
+  border: none;
+  background-color: #960a08;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  color: #dad6d6;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.4rem;
+  display: inline-block;
+  padding: 15px 0;
+}
+
+@media (max-width: 667px) {
+  button {
+    font-size: 2rem;
   }
 }
 
@@ -410,27 +435,6 @@ header .wrapper {
   }
 }
 
-button {
-  text-align: center;
-  margin-top: 40px;
-  width: 80%;
-  border: none;
-  background-color: #960a08;
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  color: #dad6d6;
-  font-family: 'Roboto', sans-serif;
-  font-size: 2.4rem;
-  display: inline-block;
-  padding: 15px 0;
-}
-
-@media (max-width: 667px) {
-  button {
-    font-size: 2rem;
-  }
-}
-
 .gallery li {
   border-radius: 15%;
   overflow: hidden;
@@ -462,10 +466,6 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-.hide {
-  display: none;
 }
 
 .gallery li.offGrid {
