@@ -1,5 +1,5 @@
 
-const images = [
+let originalImages = [
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
@@ -14,37 +14,58 @@ const images = [
     '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
 ];
 
+// const numOfCards = images.length;
 
 const imageOrder = [];
 let cardsInPlay = 0;
 
-let gameStart = function(){
+const gameStart = function(){
+
+    
+    // turning off any previously running on click event listeners
     $('.start').off('click');
+    // turning on on click event listener for start button
     $('.start').on('click',function(){
-        console.log('start was clicked');
+        // hiding elements on the page
         $(this).addClass('hide');
         $('.instructions').addClass('hide');
         $('h1').addClass('hide');
+        //un-collapsing .gallery section for cards
         $('.gallery .wrapper').addClass('fullHeight');
         
         
         randomizeImages();
+        //append each item in imageOrder to the page
         imageOrder.forEach(function(item){
             $('.gallery ul').append(`<li class="hidden" tabindex="0">${item}</li>`);
             cardsInPlay +=1;
-        }); 
-        console.log('cards in play:',cardsInPlay);
+        });
+        // $('.gallery li').removeClass('offGrid');
+        // $('.gallery li').removeClass('hide'); 
         startPicking();   
     });
 };
 
 //function to randomly copy an item from the images array, place it in a new array called imageOrder, and then pop the selected item off of the images array.  This continues until there are no more items left in the images array. 
 const randomizeImages = () => {
-    while(0 < images.length){
-        const randomIndex = Math.floor(Math.random() * images.length);
-        const newArrayItem = images.slice(randomIndex,randomIndex + 1);
-        images.splice(randomIndex,1);
+    console.log('randomize images was run');
+    let tempImages = originalImages.slice(0);
+    // const originalImages = originalImages.slice(0);
+    console.log('originalImages:', originalImages);
+    console.log('tempImages:', tempImages);
+    while(0 < tempImages.length){
+        // find a random number between 0 and one less than the number of items in the images array
+        const randomIndex = Math.floor(Math.random() * tempImages.length);
+        console.log('randomIndex is:', randomIndex);
+        // create an array of a single item copied from the images array based on the randomIndex
+        const newArrayItem = tempImages.slice(randomIndex,randomIndex + 1);
+        console.log('new array item is:', newArrayItem);
+        // remove the newArrayItem from the images array 
+        tempImages.splice(randomIndex,1);
+        // add the newArrayItem to the imageOrder array
         imageOrder.push(newArrayItem[0]);
+        console.log('imageOrder:', imageOrder);
+        console.log('tempImages:', tempImages);
     };
 }
 
@@ -69,50 +90,36 @@ const playAgain = () => {
         ,600);
         $('header .wrapper').on('click', '.playAgain', function(){
             resetStartPage();
-            console.log('resetStartPage is fired');
-            // $('li').remove();
             gameStart();
         });
-        // $('header .wrapper').on('keydown', '.playAgain', function(e){
-        //     if(e.which == 13) {
-        //         resetStartPage();
-        //         gameStart();
-        //     }
-        // })
-        
-    //display a message in the console saying you won.
-    //display a button to play again.
-    //if button is clicked, randomizeImages()
 }
 
 const resetStartPage = () => {
-    console.log('game has restarted.');
+    // originalImages = imageOrder.slice(0);
+    imageOrder.length = 0;
+    console.log('original images:', originalImages);
+    console.log('imageOrder length:',imageOrder.length);
     $('h1.congratulations').remove();
     $('div.congratulations').remove();
     $('button.congratulations').remove();
     $('.start').removeClass('hide');
     $('.instructions').removeClass('hide');
     $('h1').removeClass('hide');
-    console.log('gameStart was run');
 }
 
 const checkMatch = (image1, image2) => {
 
-    console.log('checkMatch is running');
-    console.log($(image1).attr('value'), $(image2).attr('value'));
     if($(image1).attr('value') === $(image2).attr('value')){
-        console.log("it's a match")
         $(image1).parent().addClass('offGrid');
         $(image2).parent().addClass('offGrid');
+        // originalImages.push(`${image1}`);
+        // originalImages.push(`${image2}`);
+        console.log('originalImages is now:', originalImages);
         cardsInPlay -= 2;
         if(cardsInPlay === 0) {
             playAgain();
         }
-        console.log('cards in play:',cardsInPlay);
-        
-    } 
-    else {
-        console.log(`it's not a match`);
+    } else {
         setTimeout(()=> {
         $(image1).parent().addClass('hidden');
         $(image2).parent().addClass('hidden');
@@ -122,11 +129,6 @@ const checkMatch = (image1, image2) => {
     startPicking();
 }
 
-
-
-
-
-
 const clickedCards = [];
 
 const checkNumberOfPicks = function(card) {
@@ -135,21 +137,15 @@ const checkNumberOfPicks = function(card) {
     $(card).removeAttr('tabindex');
     
     clickedCards.push(card);
-        console.log('clicked cards array:', clickedCards);
-    // } else if(clickedCards.length === 1){
-        // $(this).removeClass('hidden');
-        // clickedCards.push(this);
-        // console.log('clicked cards array:', clickedCards);      
-
+    
+   
     if(clickedCards.length === 2){
-        console.log('condition is met, going to run checkMatch');
+        // console.log('items submitted for checking:',$(clickedCards[0]).firstchild,$(clickedCards[1]));
         checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
+        
         $('.gallery li').removeClass('notClickable');
         $('.gallery li').removeAttr('tabindex');
         $('.gallery li').attr('tabindex','0');
-        // $('ul').off('click','li');
-    } else {
-        console.log('condition is not met.')
     }; 
 }
 
@@ -160,9 +156,12 @@ const startPicking = () => {
     // clearArray(clickedCards);
     console.log('length of clicked cards array',clickedCards.length);
     $('ul').on('keydown', 'li',function(e){
-        if(e.which == 13){
+        if(e.which == 13 || e.which == 32){
             console.log('click');
             checkNumberOfPicks(this);
+            $(this).keydown(function(e){
+                e.stopPropagation();
+            });
             // console.log('length of array before clicking',clickedCards.length); 
             // if(clickedCards.length === 0){   
         }   
