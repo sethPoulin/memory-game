@@ -72,11 +72,24 @@ $(document).ready(function(){
 
     // Runs checkmatch() once 2 cards have been picked.
     const checkNumberOfPicks = function(card) {
+        console.log(clickedCards.length)
         $(card).removeClass('hidden');
         // Makes picked card unlclickable so as not to trigger 'win' event with same card behaving like 2 identical cards
-        $(card).addClass('notClickable');
+        // $(card).addClass('notClickable');
+        console.log($(card).attr('key'));
+        if (clickedCards.length === 0) {
+            clickedCards.push(card);
+            return;
+        };
 
-        clickedCards.push(card);
+        if((clickedCards.length === 1) && ($(card).attr('key')===$(clickedCards[0]).attr('key'))){
+            $('header').append(`
+                <p>Please click on a different card.</p>
+            `);
+        } else {
+            clickedCards.push(card); 
+            return;
+        };
 
         if(clickedCards.length === 2){
             checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
