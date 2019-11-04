@@ -22,7 +22,7 @@ $(document).ready(function(){
 
         // turning off any previously running on click event listeners
         $('.start').off('click');
-        // turning on on click event listener for start button
+        // turning on onclick event listener for start button
         $('.start').on('click',function(){
             // hiding elements on the page
             $(this).addClass('hide');
@@ -33,8 +33,8 @@ $(document).ready(function(){
                     
             randomizeImages();
             //append each item in imageOrder to the page
-            imageOrder.forEach(function(item){
-                $('.gallery ul').append(`<li class="hidden">${item}</li>`);
+            imageOrder.map(function(item, index){
+                $('.gallery ul').append(`<li class="hidden" key="${index}">${item}</li>`);
                 cardsInPlay +=1;
             });
 
@@ -50,7 +50,7 @@ $(document).ready(function(){
         while(0 < tempImages.length){
             // find a random number between 0 and one less than the number of items in the images array
             const randomIndex = Math.floor(Math.random() * tempImages.length);
-            // create an array of a single item copied from the images array based on the randomIndex
+            // create an array of a single item *copied* from the images array based on the randomIndex
             const newArrayItem = tempImages.slice(randomIndex,randomIndex + 1);
             // remove the newArrayItem from the images array 
             tempImages.splice(randomIndex,1);
