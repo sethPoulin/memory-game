@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//Write a function that takes two arrays and returns their intersection as an array.
+//intersection([1, 2 ,3], [2, 3, 4]) -> [2, 3]
+//intersection([a, 1 , 'foo'], ['foo', 17, a]) -> [a, 'foo']
+
+//1.for 2 arrays, arr1 and arr2, filter over arr1 and return all elements that arr2 includes.
+// let newArray = [];
+
+// getIntersection = (arr1, arr2) => {
+//     newArray = arr1.filter((el)=> {
+//     return arr2.includes(el);
+//     }
+// )}
+
+// getIntersection([1,2,3], [2,3,4]);
+// console.log(newArray);
+
+const arr1 = [1, 2, 3];
+
+let obj = {};
+
+arr1.forEach(el=>{
+    obj[el] = true;
+});
+
+console.log(obj);
+
+
+
+</script>
+  
+  </body>
+  </html>
+  

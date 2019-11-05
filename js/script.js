@@ -60,6 +60,7 @@ $(document).ready(function(){
     }
 
     const startPicking = () => {
+
         // Removes any prior event listeners
         $('ul').off('click');
         //Starts event listener for clicks on cards
@@ -72,37 +73,43 @@ $(document).ready(function(){
 
     // Runs checkmatch() once 2 cards have been picked.
     const checkNumberOfPicks = function(card) {
-        console.log(clickedCards.length)
+        $('p.warning').addClass('transparent');
+        
+
         $(card).removeClass('hidden');
         // Makes picked card unlclickable so as not to trigger 'win' event with same card behaving like 2 identical cards
-        // $(card).addClass('notClickable');
-        console.log($(card).attr('key'));
+
+
         if (clickedCards.length === 0) {
             clickedCards.push(card);
-            return;
-        };
 
-        if((clickedCards.length === 1) && ($(card).attr('key')===$(clickedCards[0]).attr('key'))){
-            $('header').append(`
-                <p>Please click on a different card.</p>
-            `);
-        } else {
-            clickedCards.push(card); 
-            return;
-        };
 
-        if(clickedCards.length === 2){
+        } else if(
+            (clickedCards.length === 1) && ($(card).attr('key')===$(clickedCards[0]).attr('key'))) {
+ 
+                $('p.warning').removeClass('transparent');
+
+        } else if(
+            clickedCards.length ===1
+        ) {
+            clickedCards.push(card)
+
             checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
-            
-            $('.gallery li').removeClass('notClickable');
-        }; 
-    }
+        };
+    };
+      
+        // console.log('clickCards length after first push', clickedCards.length);
+        // console.log('clicked card key:',$(clickedCards[0]).attr('key'));
+
+        
+        // console.log('clickCard length before misfire:', clickedCards.length);
 
     const clearArray = (array) => {
         array.length = 0;
     }
 
     const checkMatch = (image1, image2) => {
+        console.log('checkmatch was run')
 
         if($(image1).attr('value') === $(image2).attr('value')){
             // If cards match, remove them from the grid and decrease number of cardsInPlay by 2.
