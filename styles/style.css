@@ -361,6 +361,11 @@ button {
   padding: 15px 0;
 }
 
+button:focus {
+  border: 4px dashed black;
+  outline: none;
+}
+
 @media (max-width: 667px) {
   button {
     font-size: 2rem;
@@ -456,6 +461,11 @@ header .wrapper {
   border: 2px solid white;
   -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
           box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
+}
+
+.gallery li:focus {
+  border: 4px dashed white;
+  outline: none;
 }
 
 .hidden {

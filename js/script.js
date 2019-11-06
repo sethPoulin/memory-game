@@ -33,8 +33,8 @@ $(document).ready(function(){
                     
             randomizeImages();
             //append each item in imageOrder to the page
-            imageOrder.map(function(item, index){
-                $('.gallery ul').append(`<li class="hidden" key="${index}">${item}</li>`);
+            imageOrder.map((item, index) => {
+                $('.gallery ul').append(`<li class="hidden" tabindex="0" key="${index}">${item}</li>`);
                 cardsInPlay +=1;
             });
 
@@ -56,13 +56,6 @@ $(document).ready(function(){
             imageOrder.push(imageToAdd[0]);
             //empty out imageToAdd
             clearArray(imageToAdd);
-            // create an array of a single item *copied* from the images array based on the randomIndex
-
-            // const newArrayItem = tempImages.slice(randomIndex,randomIndex + 1);
-            // remove the newArrayItem from the images array 
-            // tempImages.splice(randomIndex,1);
-            // add the newArrayItem to the imageOrder array
-            // imageOrder.push(newArrayItem[0]);
         };
     }
 
@@ -70,10 +63,19 @@ $(document).ready(function(){
 
         // Removes any prior event listeners
         $('ul').off('click');
-        //Starts event listener for clicks on cards
+        $('ul').off('keydown');
+        //Starts event listener for clicks on cards.  When a card is clicked, run checkNumberOfPicks function with that card as an argument.
         $('ul').on('click', 'li', function(){
             checkNumberOfPicks(this);
         });
+        //Same as above but listens for keyboard input to pick the card.
+        $('ul').on('keydown', 'li',function(e){
+            if(e.which == 13 || e.which == 32){
+                console.log('click');
+                checkNumberOfPicks(this);
+                }
+            }
+        )
     }
 
     const clickedCards = [];
@@ -118,7 +120,9 @@ $(document).ready(function(){
         if($(card1).attr('value') === $(card2).attr('value')){
             //remove both cards from the grid
             $(card1).parent().addClass('offGrid');
+            $(card1).parent().removeAttr('tabindex');
             $(card2).parent().addClass('offGrid');
+            $(card2).parent().removeAttr('tabindex');
             //and subtract 2 from the the number of cards in play
             cardsInPlay -= 2;
             //if cardsInPlay is now at zero, run the playAgain function
