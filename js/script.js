@@ -18,7 +18,7 @@ $(document).ready(function(){
     const imageOrder = [];
     let cardsInPlay = 0;
 
-    const gameStart = function(){
+    const gameStart = () => {
 
         // turning off any previously running on click event listeners
         $('.start').off('click');
@@ -38,13 +38,13 @@ $(document).ready(function(){
                 cardsInPlay +=1;
             });
 
-            startPicking();   
+            startClickListeners();   
         });
     };
 
     const randomizeImages = () => {
 
-        // Clone the originalImages array so it can be used again when game restarts
+        // Clone the originalImages array so original array can be re-used when game restarts
         let tempImages = originalImages.slice(0);
         //Cycle through the tempImages array until there are no items left.
         while(0 < tempImages.length){
@@ -59,7 +59,7 @@ $(document).ready(function(){
         };
     }
 
-    const startPicking = () => {
+    const startClickListeners = () => {
 
         // Removes any prior event listeners
         $('ul').off('click');
@@ -71,8 +71,9 @@ $(document).ready(function(){
 
     const clickedCards = [];
 
-    // Runs checkmatch() once 2 cards have been picked.
+    // Checks the current number of card pics and runs checkmatch() once 2 cards have been picked.
     const checkNumberOfPicks = function(card) {
+
         $('p.warning').addClass('transparent');
         
 
@@ -98,43 +99,48 @@ $(document).ready(function(){
         };
     };
       
-        // console.log('clickCards length after first push', clickedCards.length);
-        // console.log('clicked card key:',$(clickedCards[0]).attr('key'));
-
-        
-        // console.log('clickCard length before misfire:', clickedCards.length);
-
+    //empties out an array
     const clearArray = (array) => {
         array.length = 0;
     }
 
-    const checkMatch = (image1, image2) => {
-        console.log('checkmatch was run')
+    //Checks if 2 cards are a match
+    const checkMatch = (card1, card2) => {
 
-        if($(image1).attr('value') === $(image2).attr('value')){
-            // If cards match, remove them from the grid and decrease number of cardsInPlay by 2.
-            $(image1).parent().addClass('offGrid');
-            $(image2).parent().addClass('offGrid');
+        //If the value of card1 is equal to the value of card2
+        if($(card1).attr('value') === $(card2).attr('value')){
+            //remove both cards from the grid
+            $(card1).parent().addClass('offGrid');
+            $(card2).parent().addClass('offGrid');
+            //and subtract 2 from the the number of cards in play
             cardsInPlay -= 2;
+            //if cardsInPlay is now at zero, run the playAgain function
             if(cardsInPlay === 0) {
                 playAgain();
             }
+        
         } else {
-            //re-hide the two picked cards after 400 milliseconds.
+            //re-hide the two picked cards after .5 seconds.
             setTimeout(()=> {
-            $(image1).parent().addClass('hidden');
-            $(image2).parent().addClass('hidden');
-            },400);
+            $(card1).parent().addClass('hidden');
+            $(card2).parent().addClass('hidden');
+            },500);
         };
+        //clear the clickedCards array
         clearArray(clickedCards);
-        startPicking();
+
+        startClickListeners();
     }
 
-    const playAgain = () => {
 
+    const playAgain = () => {
+        //wait 0.6 seconds and then
         setTimeout(()=> {
+            //hide the cards gallery section
             $('.gallery li').addClass('hide');
-            $('.mainWrapper').css('padding-top','');
+            //remove the padding-top from .mainWrapper
+            // $('.mainWrapper').css('padding-top','');
+            //display the congratulations message
             $('header .wrapper').append(`
             <h1 class="congratulations">You won!</h1>
             <div class="instructions congratulations">
@@ -146,8 +152,11 @@ $(document).ready(function(){
             //removes height of .gallery section to eliminate scrolling on play again page
             $('.gallery .wrapper').removeClass('fullHeight'); 
             },600);
+            //when user clicks playAgain button
             $('header .wrapper').on('click', '.playAgain', function(){
+                //reset the start page
                 resetStartPage();
+                //start the game
                 gameStart();
             });
     }
@@ -156,14 +165,17 @@ $(document).ready(function(){
         //empties the imageOrder array
         imageOrder.length = 0;
 
+        //removes the congratulations message and play again buttons
         $('h1.congratulations').remove();
         $('div.congratulations').remove();
         $('button.congratulations').remove();
+        //unhides the start elements 
         $('.start').removeClass('hide');
         $('.instructions').removeClass('hide');
         $('h1').removeClass('hide');
     }
 
+    //starts the game
     gameStart();
 
 });
