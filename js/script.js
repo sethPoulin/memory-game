@@ -50,12 +50,19 @@ $(document).ready(function(){
         while(0 < tempImages.length){
             // find a random number between 0 and one less than the number of items in the images array
             const randomIndex = Math.floor(Math.random() * tempImages.length);
+            //remove the item at index of randomIndex tempImages and return it in a new array.
+            const imageToAdd = tempImages.splice(randomIndex,1);
+            //push that array into imageOrder.
+            imageOrder.push(imageToAdd[0]);
+            //empty out imageToAdd
+            clearArray(imageToAdd);
             // create an array of a single item *copied* from the images array based on the randomIndex
-            const newArrayItem = tempImages.slice(randomIndex,randomIndex + 1);
+
+            // const newArrayItem = tempImages.slice(randomIndex,randomIndex + 1);
             // remove the newArrayItem from the images array 
-            tempImages.splice(randomIndex,1);
+            // tempImages.splice(randomIndex,1);
             // add the newArrayItem to the imageOrder array
-            imageOrder.push(newArrayItem[0]);
+            // imageOrder.push(newArrayItem[0]);
         };
     }
 
@@ -138,8 +145,6 @@ $(document).ready(function(){
         setTimeout(()=> {
             //hide the cards gallery section
             $('.gallery li').addClass('hide');
-            //remove the padding-top from .mainWrapper
-            // $('.mainWrapper').css('padding-top','');
             //display the congratulations message
             $('header .wrapper').append(`
             <h1 class="congratulations">You won!</h1>

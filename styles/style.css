@@ -342,6 +342,10 @@ p {
   }
 }
 
+p.warning {
+  padding-bottom: 20px;
+}
+
 button {
   text-align: center;
   margin-top: 40px;
