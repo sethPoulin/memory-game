@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-    const originalImages = [
+    const imageBank = [
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/berkay.jpg" alt="Golden retreiver puppy looking left." value="1">',
     '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
-    '<img src="assets/bozo.jpg" alt="Brown white and brown Corgi puppy against an orange backdrop." value="2">',
+    '<img src="assets/bozo.jpg" alt="White and brown Corgi puppy against an orange backdrop." value="2">',
     '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
     '<img src="assets/elijah.jpg" alt="Black and brown Doberman puppy." value="3">',
     '<img src="assets/fluffy.jpg" alt="Small white fluffy puppy peeking up from vegetation." value="4">',
@@ -12,13 +12,15 @@ $(document).ready(function(){
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jairo.jpg" alt="Chocolate Lab puppy looking at the camera." value="5">',
     '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
-    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">'
+    '<img src="assets/jordan.jpg" alt="Grey and white Husky puppy." value="6">',
+    '<img src="assets/shane.jpg" alt="Golden Labrador puppy licking its lips." value="7">',
+    '<img src="assets/shane.jpg" alt="Golden Labrador puppy licking its lips." value="7">'
     ];
 
     const imageOrder = [];
     let cardsInPlay = 0;
 
-    const gameStart = () => {
+    const setupGame = () => {
 
         // turning off any previously running on click event listeners
         $('.start').off('click');
@@ -30,22 +32,45 @@ $(document).ready(function(){
             $('h1').addClass('hide');
             //un-collapsing .gallery section for cards
             $('.gallery .wrapper').addClass('fullHeight');
-                    
+            //pick the appropriate number of cards to include in the game based on the user's input
+            pickCardsInGame();  
+            //randomize the images       
             randomizeImages();
-            //append each item in imageOrder to the page
+            //append each image to the page
             imageOrder.map((item, index) => {
-                $('.gallery ul').append(`<li class="hidden" tabindex="0" key="${index}">${item}</li>`);
-                cardsInPlay +=1;
+                $('.gallery ul').append(`
+                <li class="hidden" tabindex="0" key="${index}">${item}</li>
+                `);
+                //increment the number of cards in play each time a card is appended to the page
+                cardsInPlay = index + 1;
             });
-
+            console.log('cardsInPlay',cardsInPlay);
             startClickListeners();   
         });
     };
 
+    const cardsInGame = [];
+    //randomly selects pairs of cards from imageBank to include in the game based on numOfCards
+    const pickCardsInGame = () => {
+        
+        //make a copy of the imageBank array to pull pairs of cards from    
+        const copiedImageBank = imageBank.slice(0);
+
+        //Do the following as many times as half the number of elements in the original imageBank array.  We do it half the number of times because each time the loop runs it will remove 2 items from the array, and we only want it to run until the copied array is empty.
+        for(let i = 0; i < 14 / 2; i++){
+            //get a random number between 0 and the number of items in imageBank
+            let randomCardIndex = Math.floor(Math.random() * copiedImageBank.length);
+            //make sure that the randomNumber is even
+            randomCardIndex % 2 !== 0 ? randomCardIndex -= 1 : randomCardIndex;
+            const currentCards = copiedImageBank.splice(randomCardIndex,2);
+            cardsInGame.push(...currentCards)
+        }
+    }
+
     const randomizeImages = () => {
 
-        // Clone the originalImages array so original array can be re-used when game restarts
-        let tempImages = originalImages.slice(0);
+        // Clone the imageBank array so original array can be re-used when game restarts
+        let tempImages = cardsInGame.slice(0);
         //Cycle through the tempImages array until there are no items left.
         while(0 < tempImages.length){
             // find a random number between 0 and one less than the number of items in the images array
@@ -153,7 +178,7 @@ $(document).ready(function(){
             $('header .wrapper').append(`
             <h1 class="congratulations">You won!</h1>
             <div class="instructions congratulations">
-                <p>Congratulations, you have a great memory.</p>
+                <p>You have a great memory!</p>
                 <p>Click the button below to play again.</p>
             </div>
             <button class="playAgain congratulations" tabindex="0">Play again</button>
@@ -166,7 +191,7 @@ $(document).ready(function(){
                 //reset the start page
                 resetStartPage();
                 //start the game
-                gameStart();
+                setupGame();
             });
     }
 
@@ -185,7 +210,7 @@ $(document).ready(function(){
     }
 
     //starts the game
-    gameStart();
+    setupGame();
 
 });
 
