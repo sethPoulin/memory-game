@@ -68,6 +68,10 @@ h1 {
     display: none;
 }
 
+.transparent {
+    opacity: 0;
+}
+
 h1.congratulations {
     padding-top: 200px;
 
@@ -76,7 +80,7 @@ h1.congratulations {
     }
 }
 
-p {
+p, label, form {
     color:#e8e7e7;
     font-size: 2.4rem;
     text-shadow: 1px 0 0 #b80c09;
@@ -103,18 +107,27 @@ p {
     }
 }
 
+p.warning {
+    padding-bottom: 20px;
+}
+
 button {
     text-align: center;
     margin-top: 40px;
     width: 80%;
     border: none;
-    background-color: rgba(150, 10, 8,1);
+    background-color: rgb(150, 10, 8);
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     color: $white;
     font-family: 'Roboto', sans-serif;
     font-size: 2.4rem;
     display: inline-block;
     padding: 15px 0;
+
+    &:focus {
+        border: 4px dashed black;
+        outline: none;
+    }
 
     @media(max-width: 667px) {
         font-size: 2rem;
@@ -135,6 +148,32 @@ header .wrapper {
     @media(max-width: 487px){
         width: 90%;
     }
+}
+
+.instructions {
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 10px;
+    font-size: 2rem;
+    margin-left: 10px;
+    padding-right: 30px;
+    appearance: none;
+    border: 1px solid black;
+    background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+    background-repeat: no-repeat;
+    background-position: 85% center;
+}
+
+fieldset {
+    margin: 0 auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 // ==========Gallery Styles===========
@@ -182,6 +221,11 @@ header .wrapper {
     margin: 4px;
     border: 2px solid white;
     box-shadow: 2px 2px 1px rgba(0,0,0,.35);
+
+    &:focus {
+        border: 4px dashed white;
+        outline: none;
+    }
 }
 
 .hidden {

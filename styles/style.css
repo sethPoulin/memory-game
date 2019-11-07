@@ -295,6 +295,10 @@ h1 {
   display: none;
 }
 
+.transparent {
+  opacity: 0;
+}
+
 h1.congratulations {
   padding-top: 200px;
 }
@@ -305,7 +309,7 @@ h1.congratulations {
   }
 }
 
-p {
+p, label, form {
   color: #e8e7e7;
   font-size: 2.4rem;
   text-shadow: 1px 0 0 #b80c09;
@@ -318,7 +322,7 @@ p {
 }
 
 @media (max-width: 667px) {
-  p {
+  p, label, form {
     max-width: 470px;
     font-size: 2rem;
     margin: 0 auto;
@@ -326,16 +330,20 @@ p {
 }
 
 @media (max-width: 570px) {
-  p {
+  p, label, form {
     max-width: 300px;
   }
 }
 
 @media (max-width: 366px) {
-  p {
+  p, label, form {
     width: 80%;
     font-size: 1.8rem;
   }
+}
+
+p.warning {
+  padding-bottom: 20px;
 }
 
 button {
@@ -351,6 +359,11 @@ button {
   font-size: 2.4rem;
   display: inline-block;
   padding: 15px 0;
+}
+
+button:focus {
+  border: 4px dashed black;
+  outline: none;
 }
 
 @media (max-width: 667px) {
@@ -380,6 +393,41 @@ header .wrapper {
   header .wrapper {
     width: 90%;
   }
+}
+
+.instructions {
+  margin-bottom: 30px;
+}
+
+select {
+  padding: 10px;
+  font-size: 2rem;
+  margin-left: 10px;
+  padding-right: 30px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid black;
+  background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+  background-repeat: no-repeat;
+  background-position: 85% center;
+}
+
+fieldset {
+  margin: 0 auto;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .gallery .wrapper {
@@ -448,6 +496,11 @@ header .wrapper {
   border: 2px solid white;
   -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
           box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.35);
+}
+
+.gallery li:focus {
+  border: 4px dashed white;
+  outline: none;
 }
 
 .hidden {

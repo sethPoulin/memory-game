@@ -18,12 +18,27 @@
                 <p>If they do, they'll be removed from the game.</p>  
                 <p>When there are no more cards left, you've won the game!</p>
             </div>
-            <button class="start">Press here to start</button>
+            <form action="">
+                <fieldset>
+                    <label for="userNumberOfCards">Please select the number of cards to play with</label>
+                    <select name="userNumberOfCards">
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14" selected>14</option>
+                      </select>
+                    </fieldset>
+                    <button class="start">Press here to start</button>
+            </form>
+
         </div>
     </header>
     <main>
         <section class="gallery">
             <div class="wrapper">
+                <p class="warning transparent">Please select a different card.</p>
                 <ul>
                     <!-- images get appended here -->
                 </ul>
@@ -34,5 +49,4 @@
 <script src="js/script.js"></script>
 
 </body>
-<!-- Table photo by Michael Mroczek on Unsplash -->
 </html>
