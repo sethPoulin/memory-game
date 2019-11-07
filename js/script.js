@@ -17,19 +17,24 @@ $(document).ready(function(){
     '<img src="assets/shane.jpg" alt="Golden Labrador puppy licking its lips." value="7">'
     ];
 
+
     const imageOrder = [];
     let cardsInPlay = 0;
+    const cardsInGame = [];
+
 
     const setupGame = () => {
 
         // turning off any previously running on click event listeners
         $('.start').off('click');
         // turning on onclick event listener for start button
-        $('.start').on('click',function(){
+        $('.start').on('click',function(e){
+            e.preventDefault();
             // hiding elements on the page
-            $(this).addClass('hide');
+            // $(this).addClass('hide');
             $('.instructions').addClass('hide');
             $('h1').addClass('hide');
+            $('form').addClass('hide');
             //un-collapsing .gallery section for cards
             $('.gallery .wrapper').addClass('fullHeight');
             //pick the appropriate number of cards to include in the game based on the user's input
@@ -44,24 +49,27 @@ $(document).ready(function(){
                 //increment the number of cards in play each time a card is appended to the page
                 cardsInPlay = index + 1;
             });
-            console.log('cardsInPlay',cardsInPlay);
             startClickListeners();   
         });
     };
 
-    const cardsInGame = [];
-    //randomly selects pairs of cards from imageBank to include in the game based on numOfCards
+    //randomly selects pairs of cards from imageBank to include in the game based on userNumOfCards
     const pickCardsInGame = () => {
+
+        clearArray(cardsInGame);
+        //get value of userNumberOfCards and turn it into a number
+        const userNumberOfCards = Number($('select').val());
         
         //make a copy of the imageBank array to pull pairs of cards from    
         const copiedImageBank = imageBank.slice(0);
 
         //Do the following as many times as half the number of elements in the original imageBank array.  We do it half the number of times because each time the loop runs it will remove 2 items from the array, and we only want it to run until the copied array is empty.
-        for(let i = 0; i < 14 / 2; i++){
+        for(let i = 0; i < userNumberOfCards / 2; i++){
             //get a random number between 0 and the number of items in imageBank
             let randomCardIndex = Math.floor(Math.random() * copiedImageBank.length);
             //make sure that the randomNumber is even
             randomCardIndex % 2 !== 0 ? randomCardIndex -= 1 : randomCardIndex;
+
             const currentCards = copiedImageBank.splice(randomCardIndex,2);
             cardsInGame.push(...currentCards)
         }
@@ -96,7 +104,6 @@ $(document).ready(function(){
         //Same as above but listens for keyboard input to pick the card.
         $('ul').on('keydown', 'li',function(e){
             if(e.which == 13 || e.which == 32){
-                console.log('click');
                 checkNumberOfPicks(this);
                 }
             }
@@ -110,14 +117,11 @@ $(document).ready(function(){
 
         $('p.warning').addClass('transparent');
         
-
         $(card).removeClass('hidden');
         // Makes picked card unlclickable so as not to trigger 'win' event with same card behaving like 2 identical cards
 
-
         if (clickedCards.length === 0) {
             clickedCards.push(card);
-
 
         } else if(
             (clickedCards.length === 1) && ($(card).attr('key')===$(clickedCards[0]).attr('key'))) {
@@ -128,7 +132,6 @@ $(document).ready(function(){
             clickedCards.length ===1
         ) {
             clickedCards.push(card)
-
             checkMatch(clickedCards[0].firstChild,clickedCards[1].firstChild);
         };
     };
@@ -143,20 +146,21 @@ $(document).ready(function(){
 
         //If the value of card1 is equal to the value of card2
         if($(card1).attr('value') === $(card2).attr('value')){
-            //remove both cards from the grid
+            //Remove both cards from the grid
             $(card1).parent().addClass('offGrid');
+            //and remove the tabIndex so tab will only work on items remaining on the board.
             $(card1).parent().removeAttr('tabindex');
             $(card2).parent().addClass('offGrid');
             $(card2).parent().removeAttr('tabindex');
-            //and subtract 2 from the the number of cards in play
+            //Subtract 2 from the the number of cards in play.
             cardsInPlay -= 2;
-            //if cardsInPlay is now at zero, run the playAgain function
+            //If cardsInPlay is now at zero, run the playAgain function.
             if(cardsInPlay === 0) {
                 playAgain();
             }
         
         } else {
-            //re-hide the two picked cards after .5 seconds.
+            //Re-hide the two picked cards after .5 seconds.
             setTimeout(()=> {
             $(card1).parent().addClass('hidden');
             $(card2).parent().addClass('hidden');
@@ -204,9 +208,10 @@ $(document).ready(function(){
         $('div.congratulations').remove();
         $('button.congratulations').remove();
         //unhides the start elements 
-        $('.start').removeClass('hide');
+        // $('.start').removeClass('hide');
         $('.instructions').removeClass('hide');
         $('h1').removeClass('hide');
+        $('form').removeClass('hide');
     }
 
     //starts the game
