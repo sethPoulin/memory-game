@@ -18,9 +18,15 @@ $(document).ready(function(){
     ];
 
 
+    
     const imageOrder = [];
     let cardsInPlay = 0;
     const cardsInGame = [];
+
+    //empties out an array
+    const clearArray = (array) => {
+        array.length = 0;
+    }
 
 
     const setupGame = () => {
@@ -37,11 +43,11 @@ $(document).ready(function(){
             $('form').addClass('hide');
             //un-collapsing .gallery section for cards
             $('.gallery .wrapper').addClass('fullHeight');
-            //pick the appropriate number of cards to include in the game based on the user's input
+            //Populates the cardsInGame array with pairs of cards to include in the game, based on the number of cards selected by the user.
             pickCardsInGame();  
-            //randomize the images       
-            randomizeImages();
-            //append each image to the page
+            //Randomly pick cards from the cardsInGame array and push them into the imageOrder array, thereby creating a random order for the cards to display.
+            randomizeImageOrder();
+            //Append each card to the page by iterating over the imageOrder array.
             imageOrder.map((item, index) => {
                 $('.gallery ul').append(`
                 <li class="hidden" tabindex="0" key="${index}">${item}</li>
@@ -49,6 +55,7 @@ $(document).ready(function(){
                 //increment the number of cards in play each time a card is appended to the page
                 cardsInPlay = index + 1;
             });
+            //Starts listening for clicks or keydowns from user.
             startClickListeners();   
         });
     };
@@ -56,11 +63,12 @@ $(document).ready(function(){
     //randomly selects pairs of cards from imageBank to include in the game based on userNumOfCards
     const pickCardsInGame = () => {
 
+        //Empties out the cardsInGame array so that it starts at zero with every game.
         clearArray(cardsInGame);
-        //get value of userNumberOfCards and turn it into a number
+        //Get value of userNumberOfCards and turn it into a number.
         const userNumberOfCards = Number($('select').val());
         
-        //make a copy of the imageBank array to pull pairs of cards from    
+        //Make a copy of the imageBank array to pull pairs of cards from.   
         const copiedImageBank = imageBank.slice(0);
 
         //Do the following as many times as half the number of elements in the original imageBank array.  We do it half the number of times because each time the loop runs it will remove 2 items from the array, and we only want it to run until the copied array is empty.
@@ -71,22 +79,23 @@ $(document).ready(function(){
             randomCardIndex % 2 !== 0 ? randomCardIndex -= 1 : randomCardIndex;
 
             const currentCards = copiedImageBank.splice(randomCardIndex,2);
+            //We will end up with the cardsInGame array, which will be the cards the game is played with.
             cardsInGame.push(...currentCards)
         }
     }
 
-    const randomizeImages = () => {
+    const randomizeImageOrder = () => {
 
-        // Clone the imageBank array so original array can be re-used when game restarts
+        // Clone the cardsInGame array
         let tempImages = cardsInGame.slice(0);
         //Cycle through the tempImages array until there are no items left.
         while(0 < tempImages.length){
-            // find a random number between 0 and one less than the number of items in the images array
+            // find a random number between 0 and the number of items in the tempImages array
             const randomIndex = Math.floor(Math.random() * tempImages.length);
-            //remove the item at index of randomIndex tempImages and return it in a new array.
+            //remove the item at index of randomIndex tempImages and return it in a new array imageToAdd.
             const imageToAdd = tempImages.splice(randomIndex,1);
-            //push that array into imageOrder.
-            imageOrder.push(imageToAdd[0]);
+            //push the item in that array into imageOrder.
+            imageOrder.push(...imageToAdd);
             //empty out imageToAdd
             clearArray(imageToAdd);
         };
@@ -115,10 +124,10 @@ $(document).ready(function(){
     // Checks the current number of card pics and runs checkmatch() once 2 cards have been picked.
     const checkNumberOfPicks = function(card) {
 
+        //Removes any existing warning message each time a card is clicked.
         $('p.warning').addClass('transparent');
         
         $(card).removeClass('hidden');
-        // Makes picked card unlclickable so as not to trigger 'win' event with same card behaving like 2 identical cards
 
         if (clickedCards.length === 0) {
             clickedCards.push(card);
@@ -136,10 +145,7 @@ $(document).ready(function(){
         };
     };
       
-    //empties out an array
-    const clearArray = (array) => {
-        array.length = 0;
-    }
+    
 
     //Checks if 2 cards are a match
     const checkMatch = (card1, card2) => {
